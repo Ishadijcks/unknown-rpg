@@ -7,6 +7,8 @@ import {Road} from "@/game/features/world/roads/Road";
 import {Town} from "@/game/features/world/towns/Town";
 import {TravelAction} from "@/game/features/world/TravelAction";
 import {App} from "@/App";
+import {WorldLocation} from "@/game/features/world/WorldLocation";
+import {ResourceArea} from "@/game/features/world/resourceareas/ResourceArea";
 
 export class World extends Feature {
     name: string = "World";
@@ -16,11 +18,17 @@ export class World extends Feature {
 
     roads: Road[];
     towns: Town[];
+    resourceAreas: ResourceArea[];
 
-    constructor(roads: Road[], towns: Town[]) {
+    locations: WorldLocation[];
+
+    constructor(roads: Road[], towns: Town[], resourceAreas: ResourceArea[]) {
         super();
         this.roads = roads;
         this.towns = towns;
+        this.resourceAreas = resourceAreas;
+
+        this.locations = [...roads, ...towns, ...resourceAreas];
 
         this.playerLocation = new TownLocationIdentifier(TownId.ToonTown);
     }
@@ -48,6 +56,16 @@ export class World extends Feature {
         const duration = road.baseDifficulty / 25;
         App.game.player.addAction(new TravelAction(startingLocation, duration, target));
         return true;
+    }
+
+    getCurrentLocation(): WorldLocation | null {
+        for (const location of this.locations) {
+            if (location.identifier.equals(this.playerLocation)) {
+                return location;
+            }
+        }
+        console.error(`Could not find player location ${this.playerLocation}`);
+        return null;
     }
 
     setLocation(target: WorldLocationIdentifier) {
