@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ index + 1 }} - {{ action.description }}: {{ action.currentProgress | twoDigits }} /
+    <p>{{ index + 1 }} - {{ action.getActiveDescription() }}: {{ action.currentProgress | twoDigits }} /
       {{ action.duration | twoDigits }}
       <span v-if="action.repeat > 0">Repeat {{ action.repeat }} times</span>
       <button @click="cancel">Cancel</button>

@@ -37,7 +37,7 @@ export class Player extends Feature {
     cancelAction(action: PlayerAction) {
         const index = this.actionQueue.indexOf(action);
         if (index === -1) {
-            console.error(`Could not cancel action ${action.description} as it's not in the queue`);
+            console.error(`Could not cancel action ${action.getScheduleDescription()} as it's not in the queue`);
         }
         this.cancelActionsFromIndex(index);
     }
@@ -49,14 +49,19 @@ export class Player extends Feature {
         this.actionQueue = this.actionQueue.slice(0, index);
     }
 
-    addAction(action: PlayerAction) {
+    addAction(action: PlayerAction, repeat: number = -1) {
+        if (repeat !== -1) {
+            action.repeat = repeat;
+        }
+        action.reset();
+
         if (this.actionQueue.length >= this.maxActions) {
             console.log(`You already have ${this.maxActions} actions scheduled.`);
             return;
         }
 
         if (!App.game.player.getPlayerLocationAtEndOfQueue().equals(action.location)) {
-            console.warn(`Cannot schedule action ${action.description}, wrong location after queue`);
+            console.warn(`Cannot schedule action ${action.getScheduleDescription()}, wrong location after queue`);
             return;
         }
 
