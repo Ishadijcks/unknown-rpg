@@ -28,6 +28,20 @@
             @click="scheduleAction(action)">
       {{ action.description }}
     </button>
+
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="681px"
+           height="441px" viewBox="-0.5 -0.5 681 441"
+           style="background-color: rgb(255, 255, 255);">
+        <defs/>
+        <abc-town :x="50" :y="150" :town="getTown(TownId.SmallTown)"></abc-town>
+        <abc-town :x="250" :y="150" :town="getTown(TownId.ToonTown)"></abc-town>
+        <abc-town :x="450" :y="150" :town="getTown(TownId.AwesomeTown)"></abc-town>
+
+        <abc-road :from-x="90" :from-y="150" :to-x="210" :to-y="150" :road="getRoad(RoadId.OldTownRoad)"></abc-road>
+        <abc-road :from-x="290" :from-y="150" :to-x="410" :to-y="150" :road="getRoad(RoadId.ToonToAwesome)"></abc-road>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -37,12 +51,21 @@ import {TownLocationIdentifier} from "@/game/features/world/towns/TownLocationId
 import {TownId} from "@/game/features/world/towns/TownId";
 import {ResourceAreaId} from "@/game/features/world/resourceareas/ResourceAreaId";
 import {ResourceAreLocationIdentifier} from "@/game/features/world/resourceareas/ResourceAreaLocationIdentifier";
+import ABCTown from "@/game/features/world/ABCTown";
+import ABCRoad from "@/game/features/world/ABCRoad";
+import {RoadLocationIdentifier} from "@/game/features/world/roads/RoadLocationIdentifier";
+import {RoadId} from "@/game/features/world/roads/RoadId";
 
 export default {
   name: "ABCWorld",
+  components: {
+    'abc-town': ABCTown,
+    'abc-road': ABCRoad,
+  },
   data: function () {
     return {
       TownId: TownId,
+      RoadId: RoadId,
       ResourceAreaId: ResourceAreaId,
       world: App.game.world,
     }
@@ -58,6 +81,12 @@ export default {
     scheduleAction(action) {
       App.game.player.addAction(action);
     },
+    getTown(id) {
+      return this.world.getLocation(new TownLocationIdentifier(id));
+    },
+    getRoad(id) {
+      return this.world.getLocation(new RoadLocationIdentifier(id));
+    }
   },
 
   computed: {

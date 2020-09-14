@@ -60,6 +60,10 @@ export abstract class PlayerAction {
         }
     }
 
+    getProgressPercentage(): number {
+        return this.currentProgress / this.duration;
+    }
+
     finish(): void {
         this.isFinished = true;
         this._onFinished.dispatch(this);

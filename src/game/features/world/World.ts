@@ -59,8 +59,12 @@ export class World extends Feature {
     }
 
     getCurrentLocation(): WorldLocation | null {
+        return this.getLocation(this.playerLocation)
+    }
+
+    getLocation(id: WorldLocationIdentifier) {
         for (const location of this.locations) {
-            if (location.identifier.equals(this.playerLocation)) {
+            if (location.identifier.equals(id)) {
                 return location;
             }
         }

@@ -4,6 +4,7 @@ import {PlayerAction} from "@/game/features/player/PlayerAction";
 import {WorldLocationIdentifier} from "@/game/features/world/WorldLocationIdentifier";
 import {TravelAction} from "@/game/features/world/TravelAction";
 import {App} from "@/App";
+import {Road} from "@/game/features/world/roads/Road";
 
 export class Player extends Feature {
     name: string = "Player";
@@ -81,6 +82,18 @@ export class Player extends Feature {
             }
         }
         return App.game.world.playerLocation;
+    }
+
+    isTravelingRoad(road: Road): boolean {
+        if (this.actionQueue.length === 0) {
+            return false;
+        }
+        const travelAction = this.actionQueue[0] as TravelAction;
+        if (travelAction == null) {
+            return false
+        }
+        return travelAction.location.equals(road.from) && travelAction.targetLocation.equals(road.to)
+            || travelAction.location.equals(road.to) && travelAction.targetLocation.equals(road.from);
     }
 
     load(data: PlayerSaveData): void {
