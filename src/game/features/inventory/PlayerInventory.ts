@@ -201,7 +201,6 @@ export class PlayerInventory extends Feature {
             if (inventory.id === InventoryId.Main) {
                 continue;
             }
-            console.log(inventory.id, type, inventory.acceptsType(type));
             if (inventory.acceptsType(type) && inventory.hasEmptySlot()) {
                 return inventory;
             }

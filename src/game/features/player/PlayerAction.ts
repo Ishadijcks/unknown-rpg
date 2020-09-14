@@ -3,7 +3,7 @@ import {ISimpleEvent, SimpleEventDispatcher} from "strongly-typed-events";
 import {WorldLocationIdentifier} from "@/game/features/world/WorldLocationIdentifier";
 
 export abstract class PlayerAction {
-    description: string;
+    protected description: string;
     location: WorldLocationIdentifier
     duration: number;
     repeat: number; // 0, x, Infinity (until error)
@@ -51,7 +51,6 @@ export abstract class PlayerAction {
             console.warn("Cannot complete action that is already finished");
             return;
         }
-        console.log("Action completed");
         this._onCompletion.dispatch(this);
         const canRepeat: boolean = this.gainReward();
         if (canRepeat && this.repeat > 0) {
@@ -59,6 +58,10 @@ export abstract class PlayerAction {
         } else {
             this.finish();
         }
+    }
+
+    getProgressPercentage(): number {
+        return this.currentProgress / this.duration;
     }
 
     finish(): void {
@@ -80,7 +83,7 @@ export abstract class PlayerAction {
     }
 
     start(): boolean {
-        if(!this.canPerform()) {
+        if (!this.canPerform()) {
             console.log(`Can't start action ${this.description}`)
             return false;
         }
@@ -92,6 +95,19 @@ export abstract class PlayerAction {
         // Override if needed
     }
 
+    public getScheduleDescription(): string {
+        return this.description;
+    }
+
+    public getActiveDescription(): string {
+        return this.description;
+    }
+
+    reset(): void {
+        this.isStarted = false;
+        this.currentProgress = 0;
+        this.isFinished = false;
+    }
 
     // Override like App.game.inventory.gain(this.lake.randomResource())
     // Return false if something is blocking a repeat (full inventory, wrong location, etc)
