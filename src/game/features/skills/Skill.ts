@@ -1,5 +1,6 @@
 import {SkillType} from "@/game/features/skills/SkillType";
 import {Progress} from "@/engine/requirements/Progress";
+import {Experience} from "@/game/features/skills/Experience";
 
 
 export class Skill {
@@ -12,6 +13,13 @@ export class Skill {
     constructor(type: SkillType) {
         this.type = type;
         this.exp = 0;
+    }
+
+    gainExperience(experience: Experience) {
+        if (this.type !== experience.type) {
+            throw Error(`Cannot assign experience ${experience} to skill ${this.type}`);
+        }
+        this.exp += experience.amount;
     }
 
     getLevel(): number {

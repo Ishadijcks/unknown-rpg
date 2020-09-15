@@ -2,6 +2,7 @@ import {Feature} from "@/game/Feature";
 import {Skill} from "@/game/features/skills/Skill";
 import {SkillsSaveData} from "@/game/features/skills/SkillsSaveData";
 import {SkillType} from "@/game/features/skills/SkillType";
+import {Experience} from "@/game/features/skills/Experience";
 
 export class Skills extends Feature {
     name: string = "Skills";
@@ -14,6 +15,14 @@ export class Skills extends Feature {
             new Skill(SkillType.Fishing),
             new Skill(SkillType.Mining),
         ];
+    }
+
+    gainExperience(experience: Experience) {
+        const skill = this.getSkill(experience.type);
+        if (skill == null) {
+            throw Error(`Cannot find skill with type ${experience.type}`);
+        }
+        skill.gainExperience(experience);
     }
 
     getSkill(type: SkillType): Skill | null {
