@@ -149,6 +149,17 @@ export class Inventory {
         this.loseItem(index, this.items[index].amount);
     }
 
+    getEmptySlotCount(): number {
+        let count = 0;
+        for (const item of this.items) {
+            if (item.isEmpty()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
     getTotalAmount(id: ItemId): number {
         let total = 0;
         for (const item of this.items) {
