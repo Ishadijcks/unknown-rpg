@@ -17,10 +17,10 @@ export class Skills extends Feature {
         super();
         this.skills = [
             new Skill(SkillType.Fishing, [
-                new Recipe(RecipeId.Fishing1, 1, [], [new ItemAmount(ItemId.Fish1)], []),
+                new Recipe(RecipeId.Fishing1, 1, [], [new ItemAmount(ItemId.Fish1)], new Experience(SkillType.Fishing, 10), []),
             ]),
             new Skill(SkillType.Cooking, [
-                new Recipe(RecipeId.Cooking1, 1, [new ItemAmount(ItemId.Fish1)], [new ItemAmount(ItemId.CookedFish1)], []),
+                new Recipe(RecipeId.Cooking1, 1, [new ItemAmount(ItemId.Fish1)], [new ItemAmount(ItemId.CookedFish1)],  new Experience(SkillType.Cooking, 10), []),
             ]),
         ];
     }

@@ -131,7 +131,7 @@ export class PlayerInventory extends Feature {
         this.getSubInventory(inventory).consumeItem(index);
     }
 
-    canTakeGlobalAmounts(itemAmounts: ItemAmount[]) {
+    canTakeItemAmounts(itemAmounts: ItemAmount[]) {
         const clonedInventory = cloneDeep(this);
         try {
             for (const item of itemAmounts) {
@@ -143,6 +143,16 @@ export class PlayerInventory extends Feature {
         return true;
     }
 
+
+    gainItemAmounts(items: ItemAmount[]) {
+        for (const item of items) {
+            this.gainItemAmount(item);
+        }
+    }
+
+    gainItemAmount(item: ItemAmount) {
+        return this.gainItem(item.item, item.amount);
+    }
 
     /**
      * Loop over all inventories to try and place the amount of item.
@@ -245,5 +255,13 @@ export class PlayerInventory extends Feature {
 
     save(): InventorySaveData {
         return new InventorySaveData();
+    }
+
+    // TODO(@Isha) fix with actual logic
+    hasItemAmounts(amounts: ItemAmount[]) {
+        // for( const amount of amounts) {
+        //     if(this.h)
+        // }
+        return true;
     }
 }

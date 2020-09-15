@@ -7,8 +7,8 @@ export class RecipeAction extends PlayerAction {
     recipe: Recipe;
 
 
-    constructor(description: string, location: WorldLocationIdentifier, duration: number, recipe: Recipe, repeat: number,) {
-        super(description, location, duration, repeat);
+    constructor(description: string, location: WorldLocationIdentifier, recipe: Recipe, repeat: number) {
+        super(description, location, recipe.duration, repeat);
         this.recipe = recipe;
     }
 
@@ -16,11 +16,24 @@ export class RecipeAction extends PlayerAction {
         if (this.recipe.expReward) {
             App.game.skills.gainExperience(this.recipe.expReward);
         }
-        return false;
+        if (!App.game.playerInventory.hasItemAmounts(this.recipe.input)) {
+            console.log("doesnt have input")
+            return false;
+        }
+        if (!App.game.playerInventory.canTakeItemAmounts(this.recipe.output)) {
+            console.log("cant take items")
+
+            return false
+        }
+        // App.game.playerInventory.loseItemAmounts(this.recipe.input);
+        console.log("Gaining items")
+
+        App.game.playerInventory.gainItemAmounts(this.recipe.output);
+        return true;
     }
 
     clone(): RecipeAction {
-        return new RecipeAction(this.description, this.location, this.duration, this.recipe, this.repeat);
+        return new RecipeAction(this.description, this.location, this.recipe, this.repeat);
     }
 
 }
