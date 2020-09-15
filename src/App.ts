@@ -6,6 +6,7 @@ import {Achievements} from "@/engine/features/achievements/Achievements";
 import {WorldBuilder} from "@/game/features/world/WorldBuilder";
 import {Player} from "@/game/features/player/Player";
 import {PlayerInventory} from "@/game/features/inventory/PlayerInventory";
+import {Skills} from "@/game/features/skills/Skills";
 
 export class App {
 
@@ -25,6 +26,7 @@ export class App {
             new Player(),
             new PlayerInventory(),
             new Wallet(),
+            new Skills(),
             WorldBuilder.createWorld(),
             new Settings(),
             new Statistics(),
