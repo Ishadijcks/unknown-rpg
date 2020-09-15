@@ -7,7 +7,7 @@ export class RecipeAction extends PlayerAction {
     recipe: Recipe;
 
 
-    constructor(description: string, location: WorldLocationIdentifier, duration: number, repeat: number, recipe: Recipe) {
+    constructor(description: string, location: WorldLocationIdentifier, duration: number, recipe: Recipe, repeat: number,) {
         super(description, location, duration, repeat);
         this.recipe = recipe;
     }
@@ -17,6 +17,10 @@ export class RecipeAction extends PlayerAction {
             App.game.skills.gainExperience(this.recipe.expReward);
         }
         return false;
+    }
+
+    clone(): RecipeAction {
+        return new RecipeAction(this.description, this.location, this.duration, this.recipe, this.repeat);
     }
 
 }

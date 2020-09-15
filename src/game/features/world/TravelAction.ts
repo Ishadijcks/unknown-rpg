@@ -16,4 +16,8 @@ export class TravelAction extends PlayerAction {
         return true;
     }
 
+
+    clone(): TravelAction {
+        return new TravelAction(this.location, this.duration, this.targetLocation);
+    }
 }

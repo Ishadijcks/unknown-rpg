@@ -113,6 +113,8 @@ export abstract class PlayerAction {
     // Return false if something is blocking a repeat (full inventory, wrong location, etc)
     abstract gainReward(): boolean;
 
+    abstract clone(): PlayerAction;
+
     public get onCompletion(): ISimpleEvent<PlayerAction> {
         return this._onCompletion.asEvent();
     }

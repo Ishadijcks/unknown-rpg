@@ -50,7 +50,8 @@ export class Player extends Feature {
         this.actionQueue = this.actionQueue.slice(0, index);
     }
 
-    addAction(action: PlayerAction, repeat: number = -1) {
+    addAction(a: PlayerAction, repeat: number = -1) {
+        const action = a.clone();
         if (repeat !== -1) {
             action.repeat = repeat;
         }

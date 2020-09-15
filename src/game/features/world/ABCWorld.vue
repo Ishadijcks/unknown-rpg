@@ -91,7 +91,7 @@ export default {
 
   computed: {
     possibleActions() {
-      return this.world.getCurrentLocation().possibleActions
+      return this.world.getCurrentLocation().possibleActions;
     },
     playerLocation() {
       return this.world.playerLocation;
