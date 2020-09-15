@@ -9,6 +9,9 @@ export class WeightedDistribution<T> {
     }
 
     draw(): T {
+        if (this.outcomes.length === 0) {
+            throw new Error("Cannot draw from empty distribution");
+        }
         const totalWeight = this.getTotalWeight();
         const random = Random.floatBetween(0, totalWeight);
 
