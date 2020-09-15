@@ -1,6 +1,6 @@
 import {Requirement} from "@/engine/requirements/Requirement";
 import {SimpleEventDispatcher, ISimpleEvent} from "strongly-typed-events";
-import {RequirementProgress} from "@/engine/requirements/RequirementProgress";
+import {Progress} from "@/engine/requirements/Progress";
 import {AchievementType} from "@/engine/features/achievements/AchievementType";
 
 export class Achievement {
@@ -32,7 +32,7 @@ export class Achievement {
         return this.requirement.isCompleted();
     }
 
-    getProgress(): RequirementProgress {
+    getProgress(): Progress {
         return this.requirement.getProgress();
     }
 
