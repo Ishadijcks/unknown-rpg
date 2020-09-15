@@ -1,18 +1,27 @@
 import {SkillType} from "@/game/features/skills/SkillType";
 import {Progress} from "@/engine/requirements/Progress";
 import {Experience} from "@/game/features/skills/Experience";
+import {Recipe} from "@/game/features/recipes/Recipe";
+import {RecipeList} from "@/game/features/recipes/RecipeList";
 
 
 export class Skill {
     readonly EXP_TO_LEVEL = [0, 100, 250, 500, 1000, Infinity]
 
     type: SkillType;
+    recipes: Recipe[];
+
     exp: number;
 
 
-    constructor(type: SkillType) {
+    constructor(type: SkillType, recipes: Recipe[]) {
         this.type = type;
+        this.recipes = recipes;
         this.exp = 0;
+
+        for (const recipe of this.recipes) {
+            RecipeList.registerRecipe(recipe);
+        }
     }
 
     gainExperience(experience: Experience) {

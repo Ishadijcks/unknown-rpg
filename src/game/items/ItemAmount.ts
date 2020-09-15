@@ -5,7 +5,7 @@ export class ItemAmount {
     amount: number;
 
 
-    constructor(item: ItemId, amount: number) {
+    constructor(item: ItemId, amount: number = 1) {
         this.item = item;
         this.amount = amount;
     }
