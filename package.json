@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "lodash-es": "^4.17.15",
     "strongly-typed-events": "^1.6.17",
     "vue": "^2.6.11"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.3",
     "@vue/test-utils": "^1.0.3",
     "@types/jest": "^24.0.19",
     "@vue/cli-plugin-unit-jest": "~4.5.0",

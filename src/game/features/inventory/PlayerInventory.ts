@@ -1,3 +1,6 @@
+import {cloneDeep} from 'lodash-es';
+
+
 import {Inventory} from "./Inventory";
 import {InventoryId} from "./InventoryId";
 import {ItemId} from "../../items/ItemId";
@@ -5,6 +8,7 @@ import {Feature} from "@/game/Feature";
 import {InventorySaveData} from "@/game/features/inventory/InventorySaveData";
 import {ItemType} from "@/game/items/ItemType";
 import {ItemList} from "@/game/items/ItemList";
+import {ItemAmount} from "@/game/items/ItemAmount";
 
 
 export class PlayerInventory extends Feature {
@@ -126,6 +130,19 @@ export class PlayerInventory extends Feature {
     consumeItem(inventory: InventoryId, index: number) {
         this.getSubInventory(inventory).consumeItem(index);
     }
+
+    canTakeGlobalAmounts(itemAmounts: ItemAmount[]) {
+        const clonedInventory = cloneDeep(this);
+        try {
+            for (const item of itemAmounts) {
+                clonedInventory.gainItem(item.item, item.amount, true);
+            }
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * Loop over all inventories to try and place the amount of item.
