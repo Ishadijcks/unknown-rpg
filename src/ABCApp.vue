@@ -2,6 +2,7 @@
   <div class="container">
 
     <wallet></wallet>
+    <skills></skills>
     <settings></settings>
     <statistics></statistics>
     <achievements></achievements>
@@ -19,12 +20,14 @@ import ABCSettings from "@/engine/features/settings/ABCSettings.vue";
 import ABCStatistics from "@/engine/features/statistics/ABCStatistics.vue";
 import ABCAchievements from "@/engine/features/achievements/ABCAchievements.vue";
 import ABCWorld from "@/game/features/world/ABCWorld.vue";
+import ABCSkills from "@/game/features/skills/ABCSkills.vue";
 import ABCPlayerInventory from "@/game/features/inventory/ABCPlayerInventory.vue";
 
 export default {
 
   components: {
     'world': ABCWorld,
+    'skills': ABCSkills,
     'statistics': ABCStatistics,
     'settings': ABCSettings,
     'player': ABCPlayer,

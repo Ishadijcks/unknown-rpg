@@ -1,4 +1,4 @@
-import {RequirementProgress} from "./RequirementProgress";
+import {Progress} from "./Progress";
 
 export abstract class Requirement {
 
@@ -6,9 +6,9 @@ export abstract class Requirement {
         return this.getActualValue() >= this.getTargetValue();
     }
 
-    getProgress(): RequirementProgress {
+    getProgress(): Progress {
         const targetValue = this.getTargetValue();
-        return new RequirementProgress(Math.min(this.getActualValue(), targetValue), targetValue);
+        return new Progress(Math.min(this.getActualValue(), targetValue), targetValue);
     }
 
     abstract lockedReason(): string;
