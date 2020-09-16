@@ -55,11 +55,8 @@ export class Inventory {
      * @param amount
      */
     loseItemAmount(id: ItemId, amount: number = 1): number {
-        const item = ItemList.getItem(id);
-
         // While we still need to remove and have items left
         while (amount > 0 && this.getTotalAmount(id) > 0) {
-            console.log("Iteration");
             const nonFullStackIndex = this.getIndexOfNonFullStack(id)
             const indexToUse = nonFullStackIndex !== -1 ? nonFullStackIndex : this.getIndexOfItem(id);
             if (indexToUse === -1) {

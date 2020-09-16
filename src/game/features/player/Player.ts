@@ -35,15 +35,25 @@ export class Player extends Feature {
         }
     }
 
-    cancelAction(action: PlayerAction) {
-        const index = this.actionQueue.indexOf(action);
-        if (index === -1) {
-            console.error(`Could not cancel action ${action.getScheduleDescription()} as it's not in the queue`);
+    cancelAction(index: number) {
+        const action = this.actionQueue[index];
+
+        if (action == null) {
+            console.error(`Could not find and cancel action at index ${index}`);
+            return;
+
         }
-        this.cancelActionsFromIndex(index);
+        // Reset the rest if we just canceled a travel
+        const cascadeCancel = (action as TravelAction).targetLocation != null;
+        this.cancelActionsFromIndex(index, cascadeCancel);
     }
 
-    cancelActionsFromIndex(index: number) {
+    cancelActionsFromIndex(index: number, cascade: boolean) {
+        if (!cascade) {
+            this.actionQueue[index].cancel();
+            this.actionQueue.splice(index, 1);
+            return;
+        }
         for (let i = index; i < this.actionQueue.length; i++) {
             this.actionQueue[i].cancel();
         }

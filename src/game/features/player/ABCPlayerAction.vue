@@ -21,7 +21,7 @@ export default {
 
   methods: {
     cancel() {
-      App.game.player.cancelActionsFromIndex(this.index);
+      App.game.player.cancelAction(this.index);
     }
   }
 }
