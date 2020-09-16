@@ -13,9 +13,6 @@ export class RecipeAction extends PlayerAction {
     }
 
     gainReward(): boolean {
-        if (this.recipe.expReward) {
-            App.game.skills.gainExperience(this.recipe.expReward);
-        }
         if (!App.game.playerInventory.hasItemAmounts(this.recipe.input)) {
             console.log("doesnt have input")
             return false;
@@ -24,6 +21,10 @@ export class RecipeAction extends PlayerAction {
             console.log("cant take items")
 
             return false
+        }
+
+        if (this.recipe.expReward) {
+            App.game.skills.gainExperience(this.recipe.expReward);
         }
         App.game.playerInventory.loseItemAmounts(this.recipe.input);
         console.log("Gaining items")
