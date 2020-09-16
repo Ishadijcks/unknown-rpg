@@ -257,11 +257,20 @@ export class PlayerInventory extends Feature {
         return new InventorySaveData();
     }
 
-    // TODO(@Isha) fix with actual logic
+    getTotalAmount(id: ItemId) {
+        let total = 0;
+        for (const inv of this.inventories) {
+            total += inv.getTotalAmount(id);
+        }
+        return total;
+    }
+
     hasItemAmounts(amounts: ItemAmount[]) {
-        // for( const amount of amounts) {
-        //     if(this.h)
-        // }
+        for (const amount of amounts) {
+            if (this.getTotalAmount(amount.item) < amount.amount) {
+                return false;
+            }
+        }
         return true;
     }
 }
