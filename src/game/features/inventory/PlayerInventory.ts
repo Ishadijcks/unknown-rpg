@@ -205,7 +205,7 @@ export class PlayerInventory extends Feature {
 
 
     loseItem(inventory: InventoryId, index: number, amount: number = 1) {
-        this.getSubInventory(inventory).loseItem(index, amount);
+        this.getSubInventory(inventory).loseItemAtIndex(index, amount);
     }
 
     private getInventoryToPlaceItem(id: ItemId, type: ItemType): Inventory {
@@ -267,10 +267,50 @@ export class PlayerInventory extends Feature {
 
     hasItemAmounts(amounts: ItemAmount[]) {
         for (const amount of amounts) {
-            if (this.getTotalAmount(amount.item) < amount.amount) {
+            if (!this.hasItemAmount(amount)) {
                 return false;
             }
         }
         return true;
+    }
+
+    hasItemAmount(amount: ItemAmount) {
+        if (this.getTotalAmount(amount.item) < amount.amount) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Lose item amounts by losing them from subinventories.
+     */
+    loseItemAmounts(amounts: ItemAmount[], removeAsMuchAsPossible: boolean = false): boolean {
+        if (!this.hasItemAmounts(amounts) && !removeAsMuchAsPossible) {
+            return false;
+        }
+
+        let succeeded = true;
+        for (const item of amounts) {
+            const amountLeft = this.loseItemAmount(item)
+            if (amountLeft !== 0) {
+                if (!removeAsMuchAsPossible) {
+                    console.error(`amountLeft is ${amountLeft} instead of 0 while not removing as much as possible. This indicates an error into the hasItemAmounts check`);
+                }
+                succeeded = false;
+            }
+        }
+        // Empty
+        return succeeded;
+    }
+
+    loseItemAmount(amount: ItemAmount, removeAsMuchAsPossible: boolean = false): number {
+        if (!this.hasItemAmount(amount) && !removeAsMuchAsPossible) {
+            return amount.amount;
+        }
+        let amountLeft = amount.amount;
+        for (const inv of this.inventories) {
+            amountLeft = inv.loseItemAmount(amount.item, amountLeft);
+        }
+        return amountLeft;
     }
 }

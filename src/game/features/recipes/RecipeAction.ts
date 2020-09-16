@@ -25,7 +25,7 @@ export class RecipeAction extends PlayerAction {
 
             return false
         }
-        // App.game.playerInventory.loseItemAmounts(this.recipe.input);
+        App.game.playerInventory.loseItemAmounts(this.recipe.input);
         console.log("Gaining items")
 
         App.game.playerInventory.gainItemAmounts(this.recipe.output);

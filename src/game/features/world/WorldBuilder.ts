@@ -48,7 +48,7 @@ export class WorldBuilder {
                     ]),
                     100
                 ),
-                new RecipeAction("Cook 1", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Cooking1), 1)
+                new RecipeAction("Cook 1", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Cooking1), 100)
             ]),
         ]
 

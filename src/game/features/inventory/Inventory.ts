@@ -43,7 +43,35 @@ export class Inventory {
         }
 
         item.consume();
-        this.loseItem(index, 1);
+        this.loseItemAtIndex(index, 1);
+    }
+
+
+    /**
+     * Remove items from this inventory, prefer an empty stack
+     * Recursively calls itself if stacks are emptying
+     * Returns the number of items that still need to be removed
+     * @param id
+     * @param amount
+     */
+    loseItemAmount(id: ItemId, amount: number = 1): number {
+        const item = ItemList.getItem(id);
+
+        // While we still need to remove and have items left
+        while (amount > 0 && this.getTotalAmount(id) > 0) {
+            console.log("Iteration");
+            const nonFullStackIndex = this.getIndexOfNonFullStack(id)
+            const indexToUse = nonFullStackIndex !== -1 ? nonFullStackIndex : this.getIndexOfItem(id);
+            if (indexToUse === -1) {
+                throw Error(`Index of item ${id} to lose is -1. This suggests an error in inventory management`);
+            }
+            const amountToRemove = Math.min(amount, this.items[indexToUse].amount);
+            amount -= amountToRemove;
+            this.loseItemAtIndex(indexToUse, amountToRemove);
+
+        }
+
+        return amount;
     }
 
     /**
@@ -120,6 +148,15 @@ export class Inventory {
         return -1;
     }
 
+    getIndexOfItem(id: ItemId) {
+        for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i].id === id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     getIndexOfFirstEmptySlot(): number {
         for (let i = 0; i < this.items.length; i++) {
             if (this.items[i].isEmpty()) {
@@ -138,7 +175,7 @@ export class Inventory {
     }
 
 
-    loseItem(index: number, amount: number = 1) {
+    loseItemAtIndex(index: number, amount: number = 1) {
         this.items[index].amount -= amount;
         if (this.items[index].amount <= 0) {
             this.items.splice(index, 1, new InventoryItem(ItemId.Empty, 0, 0));
@@ -146,7 +183,7 @@ export class Inventory {
     }
 
     dropStack(index: number) {
-        this.loseItem(index, this.items[index].amount);
+        this.loseItemAtIndex(index, this.items[index].amount);
     }
 
     getEmptySlotCount(): number {
