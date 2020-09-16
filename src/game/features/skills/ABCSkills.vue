@@ -1,9 +1,8 @@
 <template>
 
   <div style="">
-    Skills go here
     <p v-for="skill in skillList" :key="skill.type">
-      {{ skill.type }}: {{ skill.getLevel() }}, {{ skill.getLevelProgress() }}
+      {{ skill.type }} lvl. {{ skill.getLevel() }}, {{ skill.getLevelProgress().actual }}/{{skill.getLevelProgress().target}}
     </p>
   </div>
 </template>
