@@ -3,6 +3,10 @@ import {Skill} from "@/game/features/skills/Skill";
 import {SkillsSaveData} from "@/game/features/skills/SkillsSaveData";
 import {SkillType} from "@/game/features/skills/SkillType";
 import {Experience} from "@/game/features/skills/Experience";
+import {Recipe} from "@/game/features/recipes/Recipe";
+import {RecipeId} from "@/game/features/recipes/RecipeId";
+import {ItemAmount} from "@/game/items/ItemAmount";
+import {ItemId} from "@/game/items/ItemId";
 
 export class Skills extends Feature {
     name: string = "Skills";
@@ -12,8 +16,12 @@ export class Skills extends Feature {
     constructor() {
         super();
         this.skills = [
-            new Skill(SkillType.Fishing),
-            new Skill(SkillType.Mining),
+            new Skill(SkillType.Fishing, [
+                new Recipe(RecipeId.Fishing1, 1, [], [new ItemAmount(ItemId.Fish1)], new Experience(SkillType.Fishing, 10), []),
+            ]),
+            new Skill(SkillType.Cooking, [
+                new Recipe(RecipeId.Cooking1, 1, [new ItemAmount(ItemId.Fish1)], [new ItemAmount(ItemId.CookedFish1)],  new Experience(SkillType.Cooking, 10), []),
+            ]),
         ];
     }
 

@@ -23,11 +23,6 @@
 
     <p>Open the console to see rejected movement</p>
 
-    <h4>Actions in {{ this.world.playerLocation }}</h4>
-    <button v-for="action in possibleActions" :key="action.description"
-            @click="scheduleAction(action)">
-      {{ action.description }}
-    </button>
 
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="681px"
@@ -42,6 +37,13 @@
         <abc-road :from-x="290" :from-y="150" :to-x="410" :to-y="150" :road="getRoad(RoadId.ToonToAwesome)"></abc-road>
       </svg>
     </div>
+
+    <h4>Actions in {{ this.world.playerLocation }}</h4>
+    <button v-for="action in possibleActions" :key="action.description"
+            @click="scheduleAction(action)">
+      {{ action.description }}
+    </button>
+
   </div>
 </template>
 
@@ -91,7 +93,7 @@ export default {
 
   computed: {
     possibleActions() {
-      return this.world.getCurrentLocation().possibleActions
+      return this.world.getCurrentLocation().possibleActions;
     },
     playerLocation() {
       return this.world.playerLocation;

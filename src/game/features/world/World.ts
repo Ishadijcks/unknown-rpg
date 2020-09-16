@@ -1,7 +1,5 @@
 import {Feature} from "@/game/Feature";
 import {WorldLocationIdentifier} from "@/game/features/world/WorldLocationIdentifier";
-import {TownLocationIdentifier} from "@/game/features/world/towns/TownLocationIdentifier";
-import {TownId} from "@/game/features/world/towns/TownId";
 import {WorldSaveData} from "@/game/features/world/WorldSaveData";
 import {Road} from "@/game/features/world/roads/Road";
 import {Town} from "@/game/features/world/towns/Town";
@@ -9,6 +7,8 @@ import {TravelAction} from "@/game/features/world/TravelAction";
 import {App} from "@/App";
 import {WorldLocation} from "@/game/features/world/WorldLocation";
 import {ResourceArea} from "@/game/features/world/resourceareas/ResourceArea";
+import {ResourceAreLocationIdentifier} from "@/game/features/world/resourceareas/ResourceAreaLocationIdentifier";
+import {ResourceAreaId} from "@/game/features/world/resourceareas/ResourceAreaId";
 
 export class World extends Feature {
     name: string = "World";
@@ -30,7 +30,7 @@ export class World extends Feature {
 
         this.locations = [...roads, ...towns, ...resourceAreas];
 
-        this.playerLocation = new TownLocationIdentifier(TownId.ToonTown);
+        this.playerLocation = new ResourceAreLocationIdentifier(ResourceAreaId.Lake1);
     }
 
     /**

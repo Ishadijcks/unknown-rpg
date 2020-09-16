@@ -3,6 +3,7 @@ export enum ItemId {
 
     MoneyPotion = "MoneyPotion",
     Fish1 = "Fish1",
+    CookedFish1 = "CookedFish1",
     Fish2 = "Fish2",
     SomeSword = "SomeSword",
     AnotherShield = "AnotherShield",

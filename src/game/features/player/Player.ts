@@ -35,26 +35,41 @@ export class Player extends Feature {
         }
     }
 
-    cancelAction(action: PlayerAction) {
-        const index = this.actionQueue.indexOf(action);
-        if (index === -1) {
-            console.error(`Could not cancel action ${action.getScheduleDescription()} as it's not in the queue`);
+    cancelAction(index: number) {
+        const action = this.actionQueue[index];
+
+        if (action == null) {
+            console.error(`Could not find and cancel action at index ${index}`);
+            return;
+
         }
-        this.cancelActionsFromIndex(index);
+        // Reset the rest if we just canceled a travel
+        const cascadeCancel = (action as TravelAction).targetLocation != null;
+        this.cancelActionsFromIndex(index, cascadeCancel);
     }
 
-    cancelActionsFromIndex(index: number) {
+    cancelActionsFromIndex(index: number, cascade: boolean) {
+        if (!cascade) {
+            this.actionQueue[index].cancel();
+            this.actionQueue.splice(index, 1);
+            return;
+        }
         for (let i = index; i < this.actionQueue.length; i++) {
             this.actionQueue[i].cancel();
         }
         this.actionQueue = this.actionQueue.slice(0, index);
     }
 
-    addAction(action: PlayerAction, repeat: number = -1) {
+    addAction(a: PlayerAction, repeat: number = -1) {
+        const action = a.clone();
         if (repeat !== -1) {
             action.repeat = repeat;
         }
-        action.reset();
+
+        // No need to schedule an action for now if we can't perform it.
+        if (this.actionQueue.length === 0 && !action.canPerform()) {
+            return;
+        }
 
         if (this.actionQueue.length >= this.maxActions) {
             console.log(`You already have ${this.maxActions} actions scheduled.`);

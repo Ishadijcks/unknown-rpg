@@ -9,13 +9,16 @@ import {WorldLocationIdentifier} from "@/game/features/world/WorldLocationIdenti
 import {Requirement} from "@/engine/requirements/Requirement";
 import {TownTier} from "@/game/features/world/towns/TownTier";
 import {PlayerAction} from "@/game/features/player/PlayerAction";
-import {DummyAction, DummyAction2} from "@/game/features/player/DummyAction";
+import {DummyAction2} from "@/game/features/player/DummyAction";
 import {ResourceAreaId} from "@/game/features/world/resourceareas/ResourceAreaId";
 import {ResourceArea} from "@/game/features/world/resourceareas/ResourceArea";
 import {ResourceAreLocationIdentifier} from "@/game/features/world/resourceareas/ResourceAreaLocationIdentifier";
 import {WeightedDistribution} from "@/engine/probability/WeightedDistribution";
 import {Outcome} from "@/engine/probability/Outcome";
 import {MultiAction} from "@/game/features/player/MultiAction";
+import {RecipeAction} from "@/game/features/recipes/RecipeAction";
+import {RecipeList} from "@/game/features/recipes/RecipeList";
+import {RecipeId} from "@/game/features/recipes/RecipeId";
 
 export class WorldBuilder {
 
@@ -41,11 +44,11 @@ export class WorldBuilder {
                     "Explore the Lake",
                     new ResourceAreLocationIdentifier(ResourceAreaId.Lake1),
                     new WeightedDistribution([
-                        new Outcome(new DummyAction("Fishing", new TownLocationIdentifier(TownId.ToonTown), 3, -1), 0.9),
-                        new Outcome(new DummyAction2("Treasure", new TownLocationIdentifier(TownId.ToonTown), 3, -1), 0.1),
+                        new Outcome(new RecipeAction("Fish 1", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Fishing1), 10), 0.9),
                     ]),
                     100
                 ),
+                new RecipeAction("Cook 1", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Cooking1), 100)
             ]),
         ]
 

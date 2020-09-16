@@ -14,6 +14,7 @@ export class ItemList {
         this.registerItem(new MoneyPotion(10));
         this.registerItem(new EquipableInventory("Fish Inventory", ItemId.FishInventory1, new Inventory(InventoryId.Fish1, 6, [ItemType.Fish], ItemId.FishInventory1)));
         this.registerItem(new Item("Fish1", ItemId.Fish1, ItemType.Fish, 5));
+        this.registerItem(new Item("CookedFish1", ItemId.CookedFish1, ItemType.Global, Infinity));
     }
 
     static registerItem(item: Item) {

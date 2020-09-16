@@ -131,7 +131,7 @@ export class PlayerInventory extends Feature {
         this.getSubInventory(inventory).consumeItem(index);
     }
 
-    canTakeGlobalAmounts(itemAmounts: ItemAmount[]) {
+    canTakeItemAmounts(itemAmounts: ItemAmount[]) {
         const clonedInventory = cloneDeep(this);
         try {
             for (const item of itemAmounts) {
@@ -143,6 +143,16 @@ export class PlayerInventory extends Feature {
         return true;
     }
 
+
+    gainItemAmounts(items: ItemAmount[]) {
+        for (const item of items) {
+            this.gainItemAmount(item);
+        }
+    }
+
+    gainItemAmount(item: ItemAmount) {
+        return this.gainItem(item.item, item.amount);
+    }
 
     /**
      * Loop over all inventories to try and place the amount of item.
@@ -195,7 +205,7 @@ export class PlayerInventory extends Feature {
 
 
     loseItem(inventory: InventoryId, index: number, amount: number = 1) {
-        this.getSubInventory(inventory).loseItem(index, amount);
+        this.getSubInventory(inventory).loseItemAtIndex(index, amount);
     }
 
     private getInventoryToPlaceItem(id: ItemId, type: ItemType): Inventory {
@@ -245,5 +255,62 @@ export class PlayerInventory extends Feature {
 
     save(): InventorySaveData {
         return new InventorySaveData();
+    }
+
+    getTotalAmount(id: ItemId) {
+        let total = 0;
+        for (const inv of this.inventories) {
+            total += inv.getTotalAmount(id);
+        }
+        return total;
+    }
+
+    hasItemAmounts(amounts: ItemAmount[]) {
+        for (const amount of amounts) {
+            if (!this.hasItemAmount(amount)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    hasItemAmount(amount: ItemAmount) {
+        if (this.getTotalAmount(amount.item) < amount.amount) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Lose item amounts by losing them from subinventories.
+     */
+    loseItemAmounts(amounts: ItemAmount[], removeAsMuchAsPossible: boolean = false): boolean {
+        if (!this.hasItemAmounts(amounts) && !removeAsMuchAsPossible) {
+            return false;
+        }
+
+        let succeeded = true;
+        for (const item of amounts) {
+            const amountLeft = this.loseItemAmount(item)
+            if (amountLeft !== 0) {
+                if (!removeAsMuchAsPossible) {
+                    console.error(`amountLeft is ${amountLeft} instead of 0 while not removing as much as possible. This indicates an error into the hasItemAmounts check`);
+                }
+                succeeded = false;
+            }
+        }
+        // Empty
+        return succeeded;
+    }
+
+    loseItemAmount(amount: ItemAmount, removeAsMuchAsPossible: boolean = false): number {
+        if (!this.hasItemAmount(amount) && !removeAsMuchAsPossible) {
+            return amount.amount;
+        }
+        let amountLeft = amount.amount;
+        for (const inv of this.inventories) {
+            amountLeft = inv.loseItemAmount(amount.item, amountLeft);
+        }
+        return amountLeft;
     }
 }

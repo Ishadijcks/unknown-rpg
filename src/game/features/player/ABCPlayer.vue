@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>I'm a player</p>
     <player-action v-for="(action, index) in queue" :index="index" :action="action"
                    :key="index + '-' + action.description"></player-action>
 

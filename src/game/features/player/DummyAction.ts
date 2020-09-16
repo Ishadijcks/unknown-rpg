@@ -15,6 +15,10 @@ export class DummyAction extends PlayerAction {
         return couldAdd;
     }
 
+    clone(): DummyAction {
+        return new DummyAction(this.description, this.location, this.duration, this.repeat);
+    }
+
 }
 
 export class DummyAction2 extends PlayerAction {
@@ -29,4 +33,7 @@ export class DummyAction2 extends PlayerAction {
         return couldAdd;
     }
 
+    clone(): DummyAction2 {
+        return new DummyAction2(this.description, this.location, this.duration, this.repeat);
+    }
 }
