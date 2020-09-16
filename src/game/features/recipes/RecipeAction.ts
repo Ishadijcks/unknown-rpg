@@ -12,25 +12,34 @@ export class RecipeAction extends PlayerAction {
         this.recipe = recipe;
     }
 
-    gainReward(): boolean {
+
+    canPerform(): boolean {
         if (!App.game.playerInventory.hasItemAmounts(this.recipe.input)) {
-            console.log("doesnt have input")
             return false;
         }
         if (!App.game.playerInventory.canTakeItemAmounts(this.recipe.output)) {
-            console.log("cant take items")
-
             return false
+        }
+
+        return super.canPerform();
+    }
+
+    gainReward(): boolean {
+        // Check if no state has changed since the scheduling
+        if (!this.canPerform()) {
+            return false;
         }
 
         if (this.recipe.expReward) {
             App.game.skills.gainExperience(this.recipe.expReward);
         }
         App.game.playerInventory.loseItemAmounts(this.recipe.input);
-        console.log("Gaining items")
 
         App.game.playerInventory.gainItemAmounts(this.recipe.output);
-        return true;
+
+        // Check
+        return this.canPerform()
+
     }
 
     clone(): RecipeAction {

@@ -55,7 +55,11 @@ export class Player extends Feature {
         if (repeat !== -1) {
             action.repeat = repeat;
         }
-        action.reset();
+
+        // No need to schedule an action for now if we can't perform it.
+        if (this.actionQueue.length === 0 && !action.canPerform()) {
+            return;
+        }
 
         if (this.actionQueue.length >= this.maxActions) {
             console.log(`You already have ${this.maxActions} actions scheduled.`);

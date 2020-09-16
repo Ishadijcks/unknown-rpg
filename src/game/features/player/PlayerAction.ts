@@ -103,12 +103,6 @@ export abstract class PlayerAction {
         return this.description;
     }
 
-    reset(): void {
-        this.isStarted = false;
-        this.currentProgress = 0;
-        this.isFinished = false;
-    }
-
     // Override like App.game.inventory.gain(this.lake.randomResource())
     // Return false if something is blocking a repeat (full inventory, wrong location, etc)
     abstract gainReward(): boolean;
