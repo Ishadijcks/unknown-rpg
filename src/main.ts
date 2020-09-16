@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueApp from './ABCApp.vue'
+import VueApp from './components/ABCApp.vue'
 import {App} from "./App";
 
 import './VueFilters';

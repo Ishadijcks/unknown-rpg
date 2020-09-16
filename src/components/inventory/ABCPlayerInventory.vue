@@ -7,7 +7,7 @@
 
 <script>
 import {App} from "@/App.ts";
-import Inventory from "@/game/features/inventory/ABCInventory.vue";
+import Inventory from "@/components/inventory/ABCInventory.vue";
 
 export default {
 

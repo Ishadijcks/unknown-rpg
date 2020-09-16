@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import ABCPlayer from "@/game/features/player/ABCPlayer.vue";
+import ABCPlayer from "@/components/player/ABCPlayer.vue";
 import ABCWallet from "@/engine/features/wallet/ABCWallet.vue";
 import ABCSettings from "@/engine/features/settings/ABCSettings.vue";
 import ABCStatistics from "@/engine/features/statistics/ABCStatistics.vue";
 import ABCAchievements from "@/engine/features/achievements/ABCAchievements.vue";
-import ABCWorld from "@/game/features/world/ABCWorld.vue";
-import ABCSkills from "@/game/features/skills/ABCSkills.vue";
-import ABCPlayerInventory from "@/game/features/inventory/ABCPlayerInventory.vue";
+import ABCWorld from "@/components/world/ABCWorld.vue";
+import ABCSkills from "@/components/skills/ABCSkills.vue";
+import ABCPlayerInventory from "@/components/inventory/ABCPlayerInventory.vue";
 
 export default {
 

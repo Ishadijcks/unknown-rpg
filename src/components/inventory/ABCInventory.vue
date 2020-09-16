@@ -25,7 +25,7 @@
 
 <script>
 import {Inventory} from "@/game/features/inventory/Inventory.ts";
-import InventoryItem from "@/game/features/inventory/ABCInventoryItem.vue";
+import InventoryItem from "@/components/inventory/ABCInventoryItem.vue";
 import {ItemList} from "@/game/items/ItemList.ts";
 import {ItemId} from "@/game/items/ItemId";
 import {isConsumable} from "@/game/items/Consumable";

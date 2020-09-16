@@ -8,7 +8,7 @@
 
 <script>
 import {App} from "@/App.ts";
-import PlayerAction from "@/game/features/player/ABCPlayerAction.vue";
+import PlayerAction from "@/components/player/ABCPlayerAction.vue";
 
 export default {
   name: "ABCPlayer",
