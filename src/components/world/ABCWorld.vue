@@ -53,8 +53,8 @@ import {TownLocationIdentifier} from "@/game/features/world/towns/TownLocationId
 import {TownId} from "@/game/features/world/towns/TownId";
 import {ResourceAreaId} from "@/game/features/world/resourceareas/ResourceAreaId";
 import {ResourceAreLocationIdentifier} from "@/game/features/world/resourceareas/ResourceAreaLocationIdentifier";
-import ABCTown from "@/game/features/world/ABCTown";
-import ABCRoad from "@/game/features/world/ABCRoad";
+import ABCTown from "@/components/world/ABCTown";
+import ABCRoad from "@/components/world/ABCRoad";
 import {RoadLocationIdentifier} from "@/game/features/world/roads/RoadLocationIdentifier";
 import {RoadId} from "@/game/features/world/roads/RoadId";
 
