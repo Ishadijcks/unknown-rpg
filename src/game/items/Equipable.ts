@@ -1,10 +1,6 @@
 import {EquipmentType} from "@/game/items/EquipmentType";
+import {CombatStats} from "@/game/features/combat/CombatStats";
 
-export interface Equipable {
-    type: EquipmentType;
-
-    // Refactor to ItemStats?
-    attack: number;
-    defense: number;
-
+export interface Equipable extends CombatStats {
+    equipmentType: EquipmentType;
 }
