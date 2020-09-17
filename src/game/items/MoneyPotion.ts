@@ -7,6 +7,7 @@ import {ItemType} from "@/game/items/ItemType";
 export class MoneyPotion extends Item implements Consumable {
     value: number;
 
+    label: string = "Drink";
 
     constructor(value: number) {
         super("Money Potion", ItemId.MoneyPotion, ItemType.Global, 3);

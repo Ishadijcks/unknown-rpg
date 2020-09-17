@@ -17,7 +17,7 @@
 
     </div>
     <div class="hovered-item" v-show="hasItemSelected">
-      <button v-if="isConsumable" @click="consume">Consume</button>
+      <button v-if="isConsumable" @click="consume">{{ selectedItem.label }}</button>
       <button @click="drop">Drop</button>
     </div>
   </div>

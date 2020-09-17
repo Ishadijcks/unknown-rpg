@@ -8,6 +8,8 @@ import {App} from "@/App";
 export class EquipableInventory extends Item implements Consumable {
     inventory: Inventory;
 
+    label: string = "Equip";
+
     constructor(name: string, id: ItemId, inventory: Inventory) {
         super(name, id, ItemType.Global, 1);
         this.inventory = inventory;

@@ -1,6 +1,8 @@
 export interface Consumable {
     canConsume(): boolean;
 
+    label: string;
+
     consume(): void;
 }
 
