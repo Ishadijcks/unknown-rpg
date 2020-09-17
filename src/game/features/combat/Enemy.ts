@@ -2,11 +2,15 @@ import {CombatStats} from "@/game/features/combat/CombatStats";
 import {EnemyId} from "@/game/features/combat/EnemyId";
 import {EnemyCategory} from "@/game/features/combat/EnemyCategory";
 import {Attack} from "@/game/features/combat/Attack";
+import {Fightable} from "@/game/features/combat/Fightable";
+import {Random} from "@/engine/probability/Random";
+import {ISimpleEvent, SimpleEventDispatcher} from "strongly-typed-events";
 
-export class Enemy implements CombatStats {
+export class Enemy implements Fightable {
     id: EnemyId;
     categories: EnemyCategory[];
 
+    health: number;
     maxHealth: number;
 
     attacks: Attack[];
@@ -21,8 +25,7 @@ export class Enemy implements CombatStats {
     rangeAttack: number;
     rangeDefense: number;
 
-
-    health: number;
+    private _onDeath = new SimpleEventDispatcher<EnemyId>();
 
 
     constructor(id: EnemyId, categories: EnemyCategory[], maxHealth: number, stats: CombatStats, attacks: Attack[]) {
@@ -42,5 +45,16 @@ export class Enemy implements CombatStats {
         this.rangeDefense = stats.rangeDefense ?? 0;
     }
 
-// lootTable: LootTable;
+    attack(): Attack {
+        return Random.fromArray(this.attacks);
+    }
+
+    die(): void {
+        this._onDeath.dispatch(this.id);
+        console.log("Monster is dead, gain some loot :(");
+    }
+
+    public get onDeath(): ISimpleEvent<number> {
+        return this._onDeath.asEvent();
+    }
 }
