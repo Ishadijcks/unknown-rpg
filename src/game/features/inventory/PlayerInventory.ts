@@ -28,6 +28,8 @@ export class PlayerInventory extends Feature {
         this.enableInventory(new Inventory(InventoryId.Main, 5, [ItemType.Global, ItemType.Quest, ItemType.Fish], ItemId.Empty))
         // this.gainItem(ItemId.FishInventory1);
         this.gainItem(ItemId.OreInventory1);
+        this.gainItem(ItemId.SomeSword);
+        this.gainItem(ItemId.AnotherSword);
     }
 
     enableInventory(inventory: Inventory) {
@@ -276,10 +278,7 @@ export class PlayerInventory extends Feature {
     }
 
     hasItemAmount(amount: ItemAmount) {
-        if (this.getTotalAmount(amount.item) < amount.amount) {
-            return false;
-        }
-        return true;
+        return this.getTotalAmount(amount.item) >= amount.amount;
     }
 
     /**
