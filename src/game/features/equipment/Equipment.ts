@@ -1,6 +1,6 @@
 import {Item} from "@/game/items/Item";
-import {Equipable} from "@/game/items/Equipable";
-import {EquipmentType} from "@/game/items/EquipmentType";
+import {Equipable} from "@/game/features/equipment/Equipable";
+import {EquipmentType} from "@/game/features/equipment/EquipmentType";
 import {ItemType} from "@/game/items/ItemType";
 import {ItemId} from "@/game/items/ItemId";
 

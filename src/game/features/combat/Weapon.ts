@@ -1,6 +1,6 @@
 import {Attack} from "@/game/features/combat/Attack";
-import {Equipment} from "@/game/items/items/Equipment";
-import {EquipmentType} from "@/game/items/EquipmentType";
+import {Equipment} from "@/game/features/equipment/Equipment";
+import {EquipmentType} from "@/game/features/equipment/EquipmentType";
 import {ItemId} from "@/game/items/ItemId";
 
 export class Weapon extends Equipment {

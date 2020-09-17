@@ -8,10 +8,9 @@ import {Attack} from "@/game/features/combat/Attack";
 export interface Fightable extends CombatStats {
     maxHealth: number;
     health: number;
-    attacks: Attack[];
 
 
-    attack(): void;
+    attack(): Attack;
 
     die(): void;
 }
