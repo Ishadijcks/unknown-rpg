@@ -35,6 +35,7 @@ export class Enemy implements Fightable {
         this.health = maxHealth;
 
         this.attacks = attacks;
+
         this.criticalChance = stats.criticalChance ?? 0;
         this.dodgeChance = stats.dodgeChance ?? 0;
         this.mageAttack = stats.mageAttack ?? 0;
