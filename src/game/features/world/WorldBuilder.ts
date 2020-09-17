@@ -48,7 +48,19 @@ export class WorldBuilder {
                     ]),
                     100
                 ),
-                new RecipeAction("Cook 1", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Cooking1), 100)
+                new RecipeAction("Cook 1", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Cooking1), 100),
+                new MultiAction(
+                    "Mine",
+                    new ResourceAreLocationIdentifier(ResourceAreaId.Lake1),
+                    new WeightedDistribution([
+                        new Outcome(new RecipeAction("Mining 1", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Mining1), 1), 0.5),
+                        new Outcome(new RecipeAction("Mining 2", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Mining2), 1), 0.5),
+                    ]),
+                    100
+                ),
+                new RecipeAction("Smith bars (ore 1 & 2)", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Smithing1), 10),
+                new RecipeAction("Smith sword (5 bars)", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.SmithSword), 0),
+
             ]),
         ]
 

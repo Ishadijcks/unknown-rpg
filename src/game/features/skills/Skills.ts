@@ -16,11 +16,29 @@ export class Skills extends Feature {
     constructor() {
         super();
         this.skills = [
+            // Mining
+            new Skill(SkillType.Mining, [
+                new Recipe(RecipeId.Mining1, 1, [], [new ItemAmount(ItemId.Ore1)], new Experience(SkillType.Mining, 10), []),
+                new Recipe(RecipeId.Mining2, 1, [], [new ItemAmount(ItemId.Ore2)], new Experience(SkillType.Mining, 10), []),
+            ]),
+
+
+            // Smithing
+            new Skill(SkillType.Smithing, [
+                new Recipe(RecipeId.Smithing1, 1, [new ItemAmount(ItemId.Ore1), new ItemAmount(ItemId.Ore2)], [new ItemAmount(ItemId.Bar1)], new Experience(SkillType.Smithing, 10), []),
+                new Recipe(RecipeId.SmithSword, 1, [new ItemAmount(ItemId.Bar1, 5)], [new ItemAmount(ItemId.SomeSword, 1)], new Experience(SkillType.Smithing, 50), []),
+            ]),
+
+
+            // Fishing
             new Skill(SkillType.Fishing, [
                 new Recipe(RecipeId.Fishing1, 1, [], [new ItemAmount(ItemId.Fish1)], new Experience(SkillType.Fishing, 10), []),
             ]),
+
+
+            // Cooking
             new Skill(SkillType.Cooking, [
-                new Recipe(RecipeId.Cooking1, 1, [new ItemAmount(ItemId.Fish1)], [new ItemAmount(ItemId.CookedFish1)],  new Experience(SkillType.Cooking, 10), []),
+                new Recipe(RecipeId.Cooking1, 1, [new ItemAmount(ItemId.Fish1)], [new ItemAmount(ItemId.CookedFish1)], new Experience(SkillType.Cooking, 10), []),
             ]),
         ];
     }
