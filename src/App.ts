@@ -7,6 +7,7 @@ import {WorldBuilder} from "@/game/features/world/WorldBuilder";
 import {Player} from "@/game/features/player/Player";
 import {PlayerInventory} from "@/game/features/inventory/PlayerInventory";
 import {Skills} from "@/game/features/skills/Skills";
+import {PlayerEquipment} from "@/game/features/equipment/PlayerEquipment";
 
 export class App {
 
@@ -25,6 +26,7 @@ export class App {
         return new Game(
             new Player(),
             new PlayerInventory(),
+            new PlayerEquipment(),
             new Wallet(),
             new Skills(),
             WorldBuilder.createWorld(),
