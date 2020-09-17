@@ -18,6 +18,7 @@
     </div>
     <div class="hovered-item" v-show="hasItemSelected">
       <button v-if="isConsumable" @click="consume">{{ selectedItem.label }}</button>
+      <button v-if="isEquipable" @click="equip">Equip</button>
       <button @click="drop">Drop</button>
     </div>
   </div>
@@ -29,6 +30,7 @@ import InventoryItem from "@/components/inventory/ABCInventoryItem.vue";
 import {ItemList} from "@/game/items/ItemList.ts";
 import {ItemId} from "@/game/items/ItemId";
 import {isConsumable} from "@/game/items/Consumable";
+import {isEquipable} from "@/game/features/equipment/Equipable";
 import {App} from "@/App.ts";
 
 export default {
@@ -46,6 +48,9 @@ export default {
     isConsumable() {
       return isConsumable(this.selectedItem);
     },
+    isEquipable() {
+      return isEquipable(this.selectedItem);
+    },
     selectedItem() {
       return ItemList.getItem(this.inventory.items[this.hoveredIndex].id);
     },
@@ -59,6 +64,9 @@ export default {
   methods: {
     consume() {
       this.inventory.consumeItem(this.hoveredIndex);
+    },
+    equip() {
+      this.inventory.equipItem(this.hoveredIndex);
     },
     drop() {
       this.inventory.dropStack(this.hoveredIndex);
