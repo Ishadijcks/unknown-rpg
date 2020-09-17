@@ -3,5 +3,6 @@ export enum ItemType {
     Global = "Global",
     Quest = "Quest",
     Fish = "Fish",
+    Ore = "Ore",
     Log = "Log",
 }
