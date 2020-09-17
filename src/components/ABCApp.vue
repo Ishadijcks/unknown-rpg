@@ -9,7 +9,7 @@
     <world></world>
     <player></player>
     <player-inventory></player-inventory>
-
+    <player-equipment></player-equipment>
   </div>
 </template>
 
@@ -22,6 +22,7 @@ import ABCAchievements from "@/engine/features/achievements/ABCAchievements.vue"
 import ABCWorld from "@/components/world/ABCWorld.vue";
 import ABCSkills from "@/components/skills/ABCSkills.vue";
 import ABCPlayerInventory from "@/components/inventory/ABCPlayerInventory.vue";
+import ABCPlayerEquipment from "@/components/equipment/ABCPlayerEquipment.vue";
 
 export default {
 
@@ -32,6 +33,7 @@ export default {
     'settings': ABCSettings,
     'player': ABCPlayer,
     'player-inventory': ABCPlayerInventory,
+    'player-equipment': ABCPlayerEquipment,
     'wallet': ABCWallet,
     'achievements': ABCAchievements,
   },
