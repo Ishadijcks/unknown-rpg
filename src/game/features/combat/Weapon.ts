@@ -7,7 +7,6 @@ import {CombatStats} from "@/game/features/combat/CombatStats";
 export class Weapon extends Equipment {
     attacks: Attack[];
 
-
     constructor(name: string, id: ItemId, equipmentType: EquipmentType, stats: CombatStats, attacks: Attack[]) {
         super(name, id, EquipmentType.Weapon, stats);
         this.attacks = attacks;

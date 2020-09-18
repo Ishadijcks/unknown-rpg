@@ -25,6 +25,7 @@ export class PlayerEquipment extends Feature implements Fightable {
     maxHealth: number = 0;
     health: number = 0;
 
+    cooldown = 0;
 
     equipment: Record<EquipmentType, Equipment | null> = {
         Shield: null,
@@ -34,9 +35,12 @@ export class PlayerEquipment extends Feature implements Fightable {
     // equippedShield: Shield;
 
     attack(): Attack {
-        return (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 3);
+        return (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 1, 3);
     }
 
+    idle(delta: number ){
+        this.cooldown -= delta;
+    }
     die(): void {
         console.log("Player is dead, that can't be good");
     }

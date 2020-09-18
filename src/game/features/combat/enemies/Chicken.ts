@@ -17,7 +17,7 @@ export class Chicken extends Enemy {
             criticalChance: 0,
             dodgeChance: 0,
         }, [
-            new Attack("Peck", WeaponType.Melee, 5, 10),
+            new Attack("Peck", WeaponType.Melee, 0.7, 5, 10),
         ]);
     }
 }

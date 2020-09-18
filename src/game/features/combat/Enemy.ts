@@ -25,6 +25,8 @@ export class Enemy implements Fightable {
     rangeAttack: number;
     rangeDefense: number;
 
+    cooldown: number = 0;
+
     private _onDeath = new SimpleEventDispatcher<EnemyId>();
 
 
@@ -44,10 +46,17 @@ export class Enemy implements Fightable {
         this.meleeDefense = stats.meleeDefense ?? 0;
         this.rangeAttack = stats.rangeAttack ?? 0;
         this.rangeDefense = stats.rangeDefense ?? 0;
+
     }
 
     attack(): Attack {
-        return Random.fromArray(this.attacks);
+        const attack = Random.fromArray(this.attacks);
+        this.cooldown = attack.cooldown;
+        return attack;
+    }
+
+    idle(delta: number) {
+        this.cooldown -= delta;
     }
 
     die(): void {
