@@ -4,6 +4,9 @@ import {ItemType} from "@/game/items/ItemType";
 import {ItemId} from "@/game/items/ItemId";
 import {ItemList} from "@/game/items/ItemList";
 import {isConsumable} from "@/game/items/Consumable";
+import {isEquipable} from "@/game/features/equipment/Equipable";
+import {Equipment} from "@/game/features/equipment/Equipment";
+import {App} from "@/App";
 
 export class Inventory {
     id: InventoryId;
@@ -44,6 +47,37 @@ export class Inventory {
 
         item.consume();
         this.loseItemAtIndex(index, 1);
+    }
+
+    equipItem(index: number) {
+        const id = this.items[index].id;
+        const item = ItemList.getItem(id) as Equipment;
+
+        if (!isEquipable(item)) {
+            console.warn(`Item ${item} is not equipable`);
+            return;
+        }
+
+        if (this.getAmount(index) <= 0) {
+            console.warn(`Amount of ${this.items[index]} is not greater than 0`);
+            return;
+        }
+
+        const equippedItem = App.game.equipment.getEquippedItemForType(item.equipmentType);
+        if (equippedItem == null) {
+            App.game.equipment.equip(item);
+            this.loseItemAtIndex(index, 1);
+        } else {
+            // Switching items
+            const swappedItemId = equippedItem.id;
+
+            // Force unequip as the Id is saved anyway
+            App.game.equipment.equipment[item.equipmentType] = null;
+            this.items.splice(index, 1, new InventoryItem(swappedItemId, 1, item.maxStack));
+            App.game.equipment.equip(item)
+
+        }
+
     }
 
 

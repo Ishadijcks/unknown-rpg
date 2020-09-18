@@ -6,6 +6,8 @@ export enum ItemId {
     CookedFish1 = "CookedFish1",
     Fish2 = "Fish2",
     SomeSword = "SomeSword",
+    AnotherSword = "AnotherSword",
+
     AnotherShield = "AnotherShield",
 
     Ore1 = "Ore1",
