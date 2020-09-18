@@ -26,6 +26,7 @@ export class Enemy implements Fightable {
     rangeDefense: number;
 
     cooldown: number = 0;
+    isAlive: boolean = true;
 
     private _onDeath = new SimpleEventDispatcher<EnemyId>();
 
@@ -60,6 +61,7 @@ export class Enemy implements Fightable {
     }
 
     die(): void {
+        this.isAlive = false;
         this._onDeath.dispatch(this.id);
         console.log("Monster is dead, gain some loot :(");
     }

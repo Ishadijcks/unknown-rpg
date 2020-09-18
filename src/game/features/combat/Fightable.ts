@@ -9,7 +9,7 @@ export interface Fightable extends CombatStats {
     maxHealth: number;
     health: number;
     cooldown: number;
-
+    isAlive: boolean;
 
     attack(): Attack;
 

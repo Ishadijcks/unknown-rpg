@@ -26,7 +26,7 @@ export class PlayerEquipment extends Feature implements Fightable {
     health: number = 0;
 
     cooldown = 0;
-
+    isAlive: boolean = true;
     equipment: Record<EquipmentType, Equipment | null> = {
         Shield: null,
         Weapon: null
@@ -38,11 +38,20 @@ export class PlayerEquipment extends Feature implements Fightable {
         return (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 1, 3);
     }
 
-    idle(delta: number ){
+    idle(delta: number) {
         this.cooldown -= delta;
     }
+
     die(): void {
+        this.isAlive = false;
         console.log("Player is dead, that can't be good");
+        this.respawn();
+    }
+
+    respawn(): void {
+        console.log("Respawning player");
+        this.health = this.maxHealth;
+        this.isAlive = true;
     }
 
     // TODO(@Isha) improve this copy paste mess
