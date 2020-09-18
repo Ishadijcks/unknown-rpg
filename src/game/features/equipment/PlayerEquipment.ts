@@ -42,7 +42,9 @@ export class PlayerEquipment extends Feature implements Fightable {
     }
 
     attack(): Attack {
-        return (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 1, 3);
+        const attack = (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 1, 3);
+        this.cooldown = attack.cooldown;
+        return attack;
     }
 
     idle(delta: number) {
