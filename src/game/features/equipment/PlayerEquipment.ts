@@ -42,6 +42,13 @@ export class PlayerEquipment extends Feature implements Fightable {
         this.cooldown -= delta;
     }
 
+    takeDamage(damage: number) {
+        this.health -= damage;
+        if (this.health < 0) {
+            this.die();
+        }
+    }
+
     die(): void {
         this.isAlive = false;
         console.log("Player is dead, that can't be good");
@@ -54,7 +61,28 @@ export class PlayerEquipment extends Feature implements Fightable {
         this.isAlive = true;
     }
 
-    // TODO(@Isha) improve this copy paste mess
+    getAttackValue(type: WeaponType): number {
+        switch (type) {
+            case WeaponType.Melee:
+                return this.meleeAttack;
+            case WeaponType.Range:
+                return this.rangeAttack;
+            case WeaponType.Magic:
+                return this.mageAttack;
+        }
+    }
+
+    getDefenseValue(type: WeaponType): number {
+        switch (type) {
+            case WeaponType.Melee:
+                return this.meleeDefense;
+            case WeaponType.Range:
+                return this.rangeDefense;
+            case WeaponType.Magic:
+                return this.mageDefense;
+        }
+    }
+
     getEquippedItemForType(type: EquipmentType): Equipment | null {
         return this.equipment[type];
     }

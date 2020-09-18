@@ -5,6 +5,7 @@ import {Attack} from "@/game/features/combat/Attack";
 import {Fightable} from "@/game/features/combat/Fightable";
 import {Random} from "@/engine/probability/Random";
 import {ISimpleEvent, SimpleEventDispatcher} from "strongly-typed-events";
+import {WeaponType} from "@/game/features/combat/WeaponType";
 
 export class Enemy implements Fightable {
     id: EnemyId;
@@ -60,13 +61,44 @@ export class Enemy implements Fightable {
         this.cooldown -= delta;
     }
 
+    takeDamage(damage: number) {
+        this.health -= damage;
+        if (this.health < 0) {
+            this.die();
+        }
+    }
+
+    getAttackValue(type: WeaponType): number {
+        switch (type) {
+            case WeaponType.Melee:
+                return this.meleeAttack;
+            case WeaponType.Range:
+                return this.rangeAttack;
+            case WeaponType.Magic:
+                return this.mageAttack;
+        }
+    }
+
+    getDefenseValue(type: WeaponType): number {
+        switch (type) {
+            case WeaponType.Melee:
+                return this.meleeDefense;
+            case WeaponType.Range:
+                return this.rangeDefense;
+            case WeaponType.Magic:
+                return this.mageDefense;
+        }
+    }
+
     die(): void {
         this.isAlive = false;
         this._onDeath.dispatch(this.id);
         console.log("Monster is dead, gain some loot :(");
     }
 
-    public get onDeath(): ISimpleEvent<number> {
+    public get onDeath()
+        :
+        ISimpleEvent<number> {
         return this._onDeath.asEvent();
     }
 }
