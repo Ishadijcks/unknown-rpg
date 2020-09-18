@@ -19,6 +19,8 @@ import {MultiAction} from "@/game/features/player/MultiAction";
 import {RecipeAction} from "@/game/features/recipes/RecipeAction";
 import {RecipeList} from "@/game/features/recipes/RecipeList";
 import {RecipeId} from "@/game/features/recipes/RecipeId";
+import {CombatAction} from "@/game/features/combat/CombatAction";
+import {Chicken} from "@/game/features/combat/enemies/Chicken";
 
 export class WorldBuilder {
 
@@ -60,7 +62,7 @@ export class WorldBuilder {
                 ),
                 new RecipeAction("Smith bars (ore 1 & 2)", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.Smithing1), 10),
                 new RecipeAction("Smith sword (5 bars)", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), RecipeList.getRecipe(RecipeId.SmithSword), 0),
-
+                new CombatAction("Fight", new ResourceAreLocationIdentifier(ResourceAreaId.Lake1), new Chicken(), 0),
             ]),
         ]
 

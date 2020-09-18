@@ -22,17 +22,24 @@ export class PlayerEquipment extends Feature implements Fightable {
     rangeAttack: number = 0;
     rangeDefense: number = 0;
 
-    maxHealth: number = 0;
+    maxHealth: number;
     health: number = 0;
 
     cooldown = 0;
-    isAlive: boolean = true;
+    isAlive: boolean;
+
     equipment: Record<EquipmentType, Equipment | null> = {
         Shield: null,
         Weapon: null
     };
 
-    // equippedShield: Shield;
+
+    constructor(maxHealth: number) {
+        super();
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.isAlive = true;
+    }
 
     attack(): Attack {
         return (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 1, 3);
@@ -44,7 +51,8 @@ export class PlayerEquipment extends Feature implements Fightable {
 
     takeDamage(damage: number) {
         this.health -= damage;
-        if (this.health < 0) {
+        console.log(`Player taking damage, new health is ${this.health}`);
+        if (this.health <= 0) {
             this.die();
         }
     }

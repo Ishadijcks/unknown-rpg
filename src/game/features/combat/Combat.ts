@@ -20,6 +20,7 @@ export class Combat {
         if (this.fighter1.cooldown <= 0) {
             const attack = this.fighter1.attack();
             const damage = this.calculateDamage(this.fighter1, attack, this.fighter2);
+            console.log(`Player attacking monster for ${damage} damage`);
             this.fighter2.takeDamage(damage);
             if (!this.fighter2.isAlive) {
                 this.end();
@@ -29,7 +30,10 @@ export class Combat {
         if (this.fighter2.cooldown <= 0) {
             const attack = this.fighter2.attack();
             const damage = this.calculateDamage(this.fighter2, attack, this.fighter1);
+            console.log(`Monster attacking player for ${damage} damage`);
+
             this.fighter1.takeDamage(damage);
+
             if (!this.fighter1.isAlive) {
                 this.end();
                 return;
@@ -44,11 +48,11 @@ export class Combat {
         }
         const isCritical = Random.booleanWithProbability(attacker.criticalChance);
         const attackType = attack.weaponType;
-        let attackStat = attacker.getAttackValue(attackType) + Random.intBetween(attack.minAttack, attack.maxAttack);
-        let defenseStat = defender.getDefenseValue(attackType);
+        const attackStat = attacker.getAttackValue(attackType) + Random.intBetween(attack.minAttack, attack.maxAttack);
+        const defenseStat = defender.getDefenseValue(attackType);
 
         const baseDamage = attackStat * 100 / (100 + defenseStat);
-        return baseDamage * (isCritical ? 2 : 1);
+        return Math.ceil(baseDamage * (isCritical ? 2 : 1));
     }
 
     end(): void {

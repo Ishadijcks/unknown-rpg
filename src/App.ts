@@ -26,7 +26,7 @@ export class App {
         return new Game(
             new Player(),
             new PlayerInventory(),
-            new PlayerEquipment(),
+            new PlayerEquipment(1000),
             new Wallet(),
             new Skills(),
             WorldBuilder.createWorld(),

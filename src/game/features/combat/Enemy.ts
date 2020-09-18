@@ -63,7 +63,7 @@ export class Enemy implements Fightable {
 
     takeDamage(damage: number) {
         this.health -= damage;
-        if (this.health < 0) {
+        if (this.health <= 0) {
             this.die();
         }
     }
@@ -96,8 +96,7 @@ export class Enemy implements Fightable {
         console.log("Monster is dead, gain some loot :(");
     }
 
-    public get onDeath()
-        :
+    public get onDeath():
         ISimpleEvent<number> {
         return this._onDeath.asEvent();
     }
