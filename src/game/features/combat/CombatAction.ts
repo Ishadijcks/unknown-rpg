@@ -43,6 +43,10 @@ export class CombatAction extends PlayerAction {
     }
 
     gainReward(): boolean {
+        if(!this.combat.fighter1.isAlive) {
+            App.game.equipment.respawn();
+            return false;
+        }
         console.log("Gain reward");
         return true;
     }

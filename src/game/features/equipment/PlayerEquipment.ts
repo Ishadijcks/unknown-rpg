@@ -59,10 +59,13 @@ export class PlayerEquipment extends Feature implements Fightable {
         }
     }
 
+    gainHealth(amount: number) {
+        this.health = Math.min(this.maxHealth, this.health + amount);
+    }
+
     die(): void {
         this.isAlive = false;
         console.log("Player is dead, that can't be good");
-        this.respawn();
     }
 
     respawn(): void {

@@ -7,8 +7,8 @@ import {WeaponType} from "@/game/features/combat/WeaponType";
 export class Chicken extends Enemy {
 
     constructor() {
-        super(EnemyId.Chicken, [EnemyCategory.Birds], 20, {
-            meleeAttack: 10,
+        super(EnemyId.Chicken, [EnemyCategory.Birds], 100, {
+            meleeAttack: 1,
             meleeDefense: 10,
             rangeAttack: 0,
             rangeDefense: 0,
