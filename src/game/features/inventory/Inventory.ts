@@ -64,13 +64,15 @@ export class Inventory {
         }
 
         const equippedItem = App.game.equipment.getEquippedItemForType(item.equipmentType);
-        if(equippedItem == null) {
+        if (equippedItem == null) {
             App.game.equipment.equip(item);
             this.loseItemAtIndex(index, 1);
         } else {
             // Switching items
             const swappedItemId = equippedItem.id;
-            App.game.equipment.unEquip(item.equipmentType, index);
+
+            // Force unequip as the Id is saved anyway
+            App.game.equipment.equipment[item.equipmentType] = null;
             this.items.splice(index, 1, new InventoryItem(swappedItemId, 1, item.maxStack));
             App.game.equipment.equip(item)
 
