@@ -10,10 +10,10 @@ export class CombatAction extends PlayerAction {
 
     constructor(description: string, location: WorldLocationIdentifier, enemy: Enemy, repeat: number) {
         super(description, location, Infinity, repeat);
-        this.enemy = enemy;
+        this.enemy = enemy.clone();
 
         // Placeholder
-        this.combat = new Combat(enemy, enemy);
+        this.combat = new Combat(this.enemy, this.enemy);
     }
 
 
@@ -32,6 +32,7 @@ export class CombatAction extends PlayerAction {
 
         this.combat.tick(delta);
 
+        this.description = `Fight: ${this.combat.fighter1.health} / ${this.combat.fighter1.maxHealth} vs ${this.enemy.id} ${this.combat.fighter2.health} / ${this.combat.fighter2.maxHealth}`;
         if (!this.combat.isActive) {
             this.complete();
         }

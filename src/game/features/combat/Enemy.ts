@@ -7,7 +7,7 @@ import {Random} from "@/engine/probability/Random";
 import {ISimpleEvent, SimpleEventDispatcher} from "strongly-typed-events";
 import {WeaponType} from "@/game/features/combat/WeaponType";
 
-export class Enemy implements Fightable {
+export abstract class Enemy implements Fightable {
     id: EnemyId;
     categories: EnemyCategory[];
 
@@ -96,8 +96,9 @@ export class Enemy implements Fightable {
         console.log("Monster is dead, gain some loot :(");
     }
 
-    public get onDeath():
-        ISimpleEvent<number> {
+    abstract clone(): Enemy;
+
+    public get onDeath(): ISimpleEvent<EnemyId> {
         return this._onDeath.asEvent();
     }
 }

@@ -1,4 +1,4 @@
 export enum EnemyId {
-    Chicken,
-    Dog,
+    Chicken = "Chicken",
+    Dog = "Dog",
 }

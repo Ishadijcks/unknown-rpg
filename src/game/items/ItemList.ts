@@ -27,13 +27,13 @@ export class ItemList {
             {
                 meleeAttack: 10
             },
-            [new Attack("Poke", WeaponType.Melee, 1, 5, 10)])
+            [new Attack("Poke", WeaponType.Melee, 1, 1, 2)])
         );
         this.registerItem(new Weapon("Sword2", ItemId.AnotherSword, EquipmentType.Weapon,
             {
                 meleeAttack: 20
             },
-            [new Attack("Poke2", WeaponType.Melee, 1, 10, 15)])
+            [new Attack("Poke2", WeaponType.Melee, 1, 1, 3)])
         );
     }
 
