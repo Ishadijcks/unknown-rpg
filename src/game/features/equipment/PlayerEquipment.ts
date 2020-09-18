@@ -22,26 +22,80 @@ export class PlayerEquipment extends Feature implements Fightable {
     rangeAttack: number = 0;
     rangeDefense: number = 0;
 
-    maxHealth: number = 0;
+    maxHealth: number;
     health: number = 0;
 
+    cooldown = 0;
+    isAlive: boolean;
 
     equipment: Record<EquipmentType, Equipment | null> = {
         Shield: null,
         Weapon: null
     };
 
-    // equippedShield: Shield;
+
+    constructor(maxHealth: number) {
+        super();
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.isAlive = true;
+    }
 
     attack(): Attack {
-        return (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 3);
+        const attack = (this.equipment[EquipmentType.Weapon] as Weapon)?.attacks[0] ?? new Attack("Punch", WeaponType.Melee, 1, 1, 3);
+        this.cooldown = attack.cooldown;
+        return attack;
+    }
+
+    idle(delta: number) {
+        this.cooldown -= delta;
+    }
+
+    takeDamage(damage: number) {
+        this.health -= damage;
+        console.log(`Player taking damage, new health is ${this.health}`);
+        if (this.health <= 0) {
+            this.die();
+        }
+    }
+
+    gainHealth(amount: number) {
+        this.health = Math.min(this.maxHealth, this.health + amount);
     }
 
     die(): void {
+        this.isAlive = false;
         console.log("Player is dead, that can't be good");
     }
 
-    // TODO(@Isha) improve this copy paste mess
+    respawn(): void {
+        console.log("Respawning player");
+        this.health = this.maxHealth;
+        this.isAlive = true;
+    }
+
+    getAttackValue(type: WeaponType): number {
+        switch (type) {
+            case WeaponType.Melee:
+                return this.meleeAttack;
+            case WeaponType.Range:
+                return this.rangeAttack;
+            case WeaponType.Magic:
+                return this.mageAttack;
+        }
+    }
+
+    getDefenseValue(type: WeaponType): number {
+        switch (type) {
+            case WeaponType.Melee:
+                return this.meleeDefense;
+            case WeaponType.Range:
+                return this.rangeDefense;
+            case WeaponType.Magic:
+                return this.mageDefense;
+        }
+    }
+
     getEquippedItemForType(type: EquipmentType): Equipment | null {
         return this.equipment[type];
     }

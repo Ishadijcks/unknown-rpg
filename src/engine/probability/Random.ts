@@ -8,6 +8,10 @@ export class Random {
         return Math.floor(Math.random() * (max - min) + min);
     }
 
+    static booleanWithProbability(percentage: number): boolean {
+        return Math.random() < percentage;
+    }
+
     /**
      * Return a random float between min (inclusive) and max (exclusive)
      * @param min inclusive

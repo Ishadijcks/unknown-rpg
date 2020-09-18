@@ -9,6 +9,7 @@ import {Weapon} from "@/game/features/combat/Weapon";
 import {EquipmentType} from "@/game/features/equipment/EquipmentType";
 import {Attack} from "@/game/features/combat/Attack";
 import {WeaponType} from "@/game/features/combat/WeaponType";
+import {Food} from "@/game/items/items/Food";
 
 export class ItemList {
     static items: Record<ItemId, Item> = {} as Record<ItemId, Item>;
@@ -19,7 +20,7 @@ export class ItemList {
         this.registerItem(new EquipableInventory("Fish Inventory", ItemId.FishInventory1, new Inventory(InventoryId.Fish1, 6, [ItemType.Fish], ItemId.FishInventory1)));
         this.registerItem(new EquipableInventory("Ore Inventory", ItemId.OreInventory1, new Inventory(InventoryId.Ore1, 6, [ItemType.Ore], ItemId.OreInventory1)));
         this.registerItem(new Item("Fish1", ItemId.Fish1, ItemType.Fish, 5));
-        this.registerItem(new Item("CookedFish1", ItemId.CookedFish1, ItemType.Global, Infinity));
+        this.registerItem(new Food("CookedFish1", ItemId.CookedFish1, 25));
         this.registerItem(new Item("Ore 1", ItemId.Ore1, ItemType.Ore, 50));
         this.registerItem(new Item("Ore 2", ItemId.Ore2, ItemType.Ore, 50));
         this.registerItem(new Item("Bar 1", ItemId.Bar1, ItemType.Global, Infinity));
@@ -27,13 +28,13 @@ export class ItemList {
             {
                 meleeAttack: 10
             },
-            [new Attack("Poke", WeaponType.Melee, 5, 10)])
+            [new Attack("Poke", WeaponType.Melee, 1, 1, 2)])
         );
         this.registerItem(new Weapon("Sword2", ItemId.AnotherSword, EquipmentType.Weapon,
             {
                 meleeAttack: 20
             },
-            [new Attack("Poke2", WeaponType.Melee, 10, 15)])
+            [new Attack("Poke2", WeaponType.Melee, 1, 1, 3)])
         );
     }
 

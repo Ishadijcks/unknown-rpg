@@ -8,8 +8,8 @@ export class Chicken extends Enemy {
 
     constructor() {
         super(EnemyId.Chicken, [EnemyCategory.Birds], 100, {
-            meleeAttack: 10,
-            meleeDefense: 3,
+            meleeAttack: 1,
+            meleeDefense: 10,
             rangeAttack: 0,
             rangeDefense: 0,
             mageDefense: 0,
@@ -17,7 +17,12 @@ export class Chicken extends Enemy {
             criticalChance: 0,
             dodgeChance: 0,
         }, [
-            new Attack("Peck", WeaponType.Melee, 5, 10),
+            new Attack("Peck", WeaponType.Melee, 0.7, 5, 10),
         ]);
+    }
+
+
+    clone(): Chicken {
+        return new Chicken();
     }
 }
