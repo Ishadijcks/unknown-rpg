@@ -9,4 +9,8 @@ export class ItemAmount {
         this.item = item;
         this.amount = amount;
     }
+
+    toString(): string {
+        return `(${this.amount} ${this.item})`;
+    }
 }

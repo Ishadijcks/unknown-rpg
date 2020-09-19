@@ -6,6 +6,7 @@ import {Fightable} from "@/game/features/combat/Fightable";
 import {Random} from "@/engine/probability/Random";
 import {ISimpleEvent, SimpleEventDispatcher} from "strongly-typed-events";
 import {WeaponType} from "@/game/features/combat/WeaponType";
+import {LootTableId} from "@/engine/loot/LootTableId";
 
 export abstract class Enemy implements Fightable {
     id: EnemyId;
@@ -29,10 +30,11 @@ export abstract class Enemy implements Fightable {
     cooldown: number = 0;
     isAlive: boolean = true;
 
+    loot: LootTableId | null;
     private _onDeath = new SimpleEventDispatcher<EnemyId>();
 
 
-    constructor(id: EnemyId, categories: EnemyCategory[], maxHealth: number, stats: CombatStats, attacks: Attack[]) {
+    protected constructor(id: EnemyId, categories: EnemyCategory[], maxHealth: number, stats: CombatStats, attacks: Attack[], loot: LootTableId) {
         this.id = id;
         this.categories = categories;
         this.maxHealth = maxHealth;
@@ -49,6 +51,7 @@ export abstract class Enemy implements Fightable {
         this.rangeAttack = stats.rangeAttack ?? 0;
         this.rangeDefense = stats.rangeDefense ?? 0;
 
+        this.loot = loot;
     }
 
     attack(): Attack {

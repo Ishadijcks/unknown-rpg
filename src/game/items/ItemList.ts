@@ -24,6 +24,11 @@ export class ItemList {
         this.registerItem(new Item("Ore 1", ItemId.Ore1, ItemType.Ore, 50));
         this.registerItem(new Item("Ore 2", ItemId.Ore2, ItemType.Ore, 50));
         this.registerItem(new Item("Bar 1", ItemId.Bar1, ItemType.Global, Infinity));
+
+        this.registerItem(new Item("Feathers", ItemId.Feathers, ItemType.Global, Infinity));
+        this.registerItem(new Item("Bones", ItemId.Bones, ItemType.Global, Infinity));
+        this.registerItem(new Item("Egg", ItemId.Egg, ItemType.Global, Infinity));
+
         this.registerItem(new Weapon("Sword", ItemId.SomeSword, EquipmentType.Weapon,
             {
                 meleeAttack: 10

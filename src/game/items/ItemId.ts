@@ -8,6 +8,10 @@ export enum ItemId {
     SomeSword = "SomeSword",
     AnotherSword = "AnotherSword",
 
+    Bones = "Bones",
+    Feathers = "Feathers",
+    Egg = "Egg",
+
     AnotherShield = "AnotherShield",
 
     Ore1 = "Ore1",
