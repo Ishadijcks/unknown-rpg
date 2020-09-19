@@ -34,7 +34,7 @@ export class LootTableList {
             new LootTable(LootTableId.Chicken,
                 [new ItemEntry(ItemId.Bones), new ItemEntry(ItemId.Feathers, 1, new IntRange(3, 7))],
                 [],
-                [new ItemEntry(ItemId.Egg, 1, new IntRange(1,1), [new SkillRequirement(SkillType.Cooking, 2)])]
+                [new ItemEntry(ItemId.Egg, 1, new IntRange(1, 1), [new SkillRequirement(SkillType.Cooking, 2)])]
             )
         )
     }
