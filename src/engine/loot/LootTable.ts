@@ -41,7 +41,8 @@ export class LootTable {
 
     public calculateAlwaysLoot(): ItemAmount[] {
         let alwaysLoot: ItemAmount[] = [];
-        for (const reward of this.always) {
+        const availableLoot = LootTable.filterOnRequirements(this.always);
+        for (const reward of availableLoot) {
             alwaysLoot = alwaysLoot.concat(reward.getLoot());
         }
 
@@ -49,16 +50,25 @@ export class LootTable {
     }
 
     public calculateOneOfLoot(): ItemAmount[] {
-        const sum = LootTable.calculateWeightSum(this.oneOf);
+        const availableLoot = LootTable.filterOnRequirements(this.oneOf);
+        const sum = LootTable.calculateWeightSum(availableLoot);
         let draw = Random.floatBetween(0, sum)
-        for (let i = 0; i < this.oneOf.length; i++) {
-            if (draw <= this.oneOf[i].weight) {
-                return this.oneOf[i].getLoot();
+        for (let i = 0; i < availableLoot.length; i++) {
+            if (draw <= availableLoot[i].weight) {
+                return availableLoot[i].getLoot();
             } else {
-                draw -= this.oneOf[i].weight;
+                draw -= availableLoot[i].weight;
             }
         }
         return [];
+    }
+
+    /**
+     * Remove all entries that do not have their requirements met;
+     * @param loot
+     */
+    public static filterOnRequirements(loot: LootEntry[]): LootEntry[] {
+        return loot.filter(l => l.canGet());
     }
 
     public static calculateWeightSum(rewards: LootEntry[]) {
@@ -71,7 +81,9 @@ export class LootTable {
 
     public calculateAnyOfLoot(): ItemAmount[] {
         let anyOfLoot: ItemAmount[] = [];
-        for (const reward of this.anyOf) {
+        const availableLoot = LootTable.filterOnRequirements(this.anyOf);
+
+        for (const reward of availableLoot) {
             if (Random.booleanWithProbability(reward.weight)) {
                 anyOfLoot = anyOfLoot.concat(reward.getLoot())
             }

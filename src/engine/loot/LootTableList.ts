@@ -5,6 +5,8 @@ import {ItemId} from "@/game/items/ItemId";
 import {ItemEntry} from "@/engine/loot/ItemEntry";
 import {TableEntry} from "@/engine/loot/TableEntry";
 import {IntRange} from "@/engine/loot/IntRange";
+import {SkillRequirement} from "@/game/features/skills/SkillRequirement";
+import {SkillType} from "@/game/features/skills/SkillType";
 
 /**
  * Contains a record of all tables. Also provides helper functions such as interpolation between tables.
@@ -32,7 +34,7 @@ export class LootTableList {
             new LootTable(LootTableId.Chicken,
                 [new ItemEntry(ItemId.Bones), new ItemEntry(ItemId.Feathers, 1, new IntRange(3, 7))],
                 [],
-                [new ItemEntry(ItemId.Egg, 0.25)]
+                [new ItemEntry(ItemId.Egg, 1, new IntRange(1,1), [new SkillRequirement(SkillType.Cooking, 2)])]
             )
         )
     }
