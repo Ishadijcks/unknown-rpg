@@ -6,8 +6,19 @@ import {Random} from "@/engine/probability/Random";
 export class LootTable {
     id: LootTableId;
 
+    /**
+     * All loot that is added on every roll
+     */
     public always: LootEntry[];
+
+    /**
+     * Only one of these will be selected based on their relative weight
+     */
     public oneOf: LootEntry[];
+
+    /**
+     * Any of these have an independent chance to be added to the roll.
+     */
     public anyOf: LootEntry[];
 
     constructor(id: LootTableId, always: LootEntry[], oneOf: LootEntry[], anyOf: LootEntry[]) {
@@ -68,6 +79,9 @@ export class LootTable {
         return anyOfLoot;
     }
 
+    /**
+     * Merge duplicate ItemAmount together
+     */
     public simplifyLoot(loots: ItemAmount[]): ItemAmount[] {
         const ret: ItemAmount[] = [];
         for (const key in loots) {

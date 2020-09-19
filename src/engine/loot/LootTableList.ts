@@ -6,6 +6,9 @@ import {ItemEntry} from "@/engine/loot/ItemEntry";
 import {TableEntry} from "@/engine/loot/TableEntry";
 import {IntRange} from "@/engine/loot/IntRange";
 
+/**
+ * Contains a record of all tables. Also provides helper functions such as interpolation between tables.
+ */
 export class LootTableList {
     static tables: Record<LootTableId, LootTable> = {} as Record<LootTableId, LootTable>;
 
