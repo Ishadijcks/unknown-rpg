@@ -1,4 +1,4 @@
-import {IntRange} from "@/engine/loot/IntRange";
+import {IntRange} from "@/engine/probability/IntRange";
 import {Requirement} from "@/engine/requirements/Requirement";
 import {ItemAmount} from "@/game/items/ItemAmount";
 

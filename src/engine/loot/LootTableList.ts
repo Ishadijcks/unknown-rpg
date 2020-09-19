@@ -4,7 +4,7 @@ import {LootTable} from "@/engine/loot/LootTable";
 import {ItemId} from "@/game/items/ItemId";
 import {ItemEntry} from "@/engine/loot/ItemEntry";
 import {TableEntry} from "@/engine/loot/TableEntry";
-import {IntRange} from "@/engine/loot/IntRange";
+import {IntRange} from "@/engine/probability/IntRange";
 import {SkillRequirement} from "@/game/features/skills/SkillRequirement";
 import {SkillType} from "@/game/features/skills/SkillType";
 

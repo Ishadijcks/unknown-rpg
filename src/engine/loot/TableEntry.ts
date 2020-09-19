@@ -1,7 +1,7 @@
 import {LootEntry} from "@/engine/loot/LootEntry";
 import {LootTableId} from "@/engine/loot/LootTableId";
 import {ItemAmount} from "@/game/items/ItemAmount";
-import {IntRange} from "@/engine/loot/IntRange";
+import {IntRange} from "@/engine/probability/IntRange";
 import {Requirement} from "@/engine/requirements/Requirement";
 import {LootTableList} from "@/engine/loot/LootTableList";
 
