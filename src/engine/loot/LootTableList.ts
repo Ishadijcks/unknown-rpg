@@ -27,6 +27,14 @@ export class LootTableList {
                 [new ItemEntry(ItemId.SomeSword, 0.1)]
             )
         )
+
+        this.registerTable(
+            new LootTable(LootTableId.Chicken,
+                [new ItemEntry(ItemId.Bones), new ItemEntry(ItemId.Feathers, 1, new IntRange(3, 7))],
+                [],
+                [new ItemEntry(ItemId.Egg, 0.25)]
+            )
+        )
     }
 
     static registerTable(table: LootTable) {

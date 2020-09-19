@@ -3,6 +3,7 @@ import {Combat} from "@/game/features/combat/Combat";
 import {WorldLocationIdentifier} from "@/game/features/world/WorldLocationIdentifier";
 import {Enemy} from "@/game/features/combat/Enemy";
 import {App} from "@/App";
+import {LootTableList} from "@/engine/loot/LootTableList";
 
 export class CombatAction extends PlayerAction {
     combat: Combat;
@@ -48,6 +49,10 @@ export class CombatAction extends PlayerAction {
             return false;
         }
         console.log("Gain reward");
+        if(this.enemy.loot){
+            const loot = LootTableList.roll(this.enemy.loot)
+            App.game.playerInventory.gainItemAmounts(loot);
+        }
         return true;
     }
 
