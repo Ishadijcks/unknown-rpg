@@ -43,7 +43,7 @@ export class WiseOldWoman extends Npc {
                 new DialogDecision(DialogDecisionId.WiseOldWomanQuestion, [
                     new DialogOption("Yes", DialogId.WiseOldWomanYesBagel),
                     new DialogOption("Yuck no", DialogId.WiseOldWomanNoBagel),
-                    new DialogOption("I'll make them myself (20 cooking)", DialogId.WiseOldWomanBragAboutCooking, [new SkillRequirement(SkillType.Cooking, 3)]),
+                    new DialogOption("I'll make them myself (3 cooking)", DialogId.WiseOldWomanBragAboutCooking, [new SkillRequirement(SkillType.Cooking, 3)]),
                 ])
             ],
             DialogId.WiseOldWomanIntro

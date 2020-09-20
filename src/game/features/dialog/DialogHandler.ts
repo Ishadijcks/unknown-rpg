@@ -3,6 +3,7 @@ import {DialogDecision} from "@/game/features/dialog/DialogDecision";
 import {Dialog} from "@/game/features/dialog/Dialog";
 import {DialogId} from "@/game/features/dialog/DialogId";
 import {DialogDecisionId} from "@/game/features/dialog/DialogDecisionId";
+import {cloneDeep} from "lodash-es";
 
 export enum DialogType {
     None,
@@ -11,19 +12,22 @@ export enum DialogType {
 }
 
 export class DialogHandler {
-    public tree: DialogTree;
-
-    public type: DialogType = DialogType.None;
-
-    public decision: DialogDecision | null = null;
-    public dialog: Dialog | null = null;
+    public tree: DialogTree | null;
+    public type: DialogType;
+    public decision: DialogDecision | null;
+    public dialog: Dialog | null;
 
 
-    constructor(tree: DialogTree) {
-        this.tree = tree;
+    constructor() {
+        this.tree = null;
+        this.type = DialogType.None;
+        this.decision = null;
+        this.dialog = null;
     }
 
-    public start() {
+    public start(tree: DialogTree) {
+
+        this.tree = cloneDeep(tree);
         const root = this.tree.getRoot();
 
         // If we only have 1 option we can skip the root
@@ -64,6 +68,11 @@ export class DialogHandler {
     }
 
     private setDialog(id: DialogId) {
+        if (this.tree == null) {
+            console.error(`Cannot set dialog to ${id} when tree is null`);
+            return;
+        }
+
         this.type = DialogType.Dialog;
         this.decision = null;
         this.dialog = this.tree.getDialog(id);
@@ -76,14 +85,19 @@ export class DialogHandler {
     }
 
     private setDecision(id: DialogDecisionId) {
-        this.type = DialogType.Decision;
+        if (this.tree == null) {
+            console.error(`Cannot set decision to ${id} when tree is null`);
+            return;
+        }
+
         this.dialog = null;
         this.decision = this.tree.getDecision(id);
+        this.type = DialogType.Decision;
     }
 
     private end() {
-        this.type = DialogType.None;
         this.dialog = null;
         this.decision = null;
+        this.type = DialogType.None;
     }
 }
