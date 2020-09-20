@@ -1,6 +1,6 @@
 export enum NpcId {
     // I know I know
-    Player,
+    Player = "Player",
 
-    WiseOldWoman
+    WiseOldWoman = "Wise Old Woman"
 }

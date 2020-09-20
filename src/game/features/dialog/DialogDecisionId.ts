@@ -1,3 +1,6 @@
 export enum DialogDecisionId {
-    WiseOldWomanQuestion
+    // Used as the root of all dialog trees
+    Root,
+
+    WiseOldWomanQuestion,
 }
