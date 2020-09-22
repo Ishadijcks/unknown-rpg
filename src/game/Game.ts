@@ -12,6 +12,7 @@ import {ItemList} from "@/game/items/ItemList";
 import {Skills} from "@/game/features/skills/Skills";
 import {PlayerEquipment} from "@/game/features/equipment/PlayerEquipment";
 import {LootTableList} from "@/engine/loot/LootTableList";
+import {NpcList} from "@/game/npcs/NpcList";
 
 export class Game {
     private _tickInterval: any;
@@ -76,6 +77,7 @@ export class Game {
     public initialize(): void {
         ItemList.initialize();
         LootTableList.initialize();
+        NpcList.initialize();
 
         for (const feature of this.getAllFeatures()) {
             feature.initialize();
